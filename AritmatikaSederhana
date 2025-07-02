@@ -1,0 +1,83 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class AritmatikaSederhana extends JFrame implements ActionListener {
+    JTextField input1, input2, hasil;
+    JButton tambah, kurang, kali, bagi;
+
+    public AritmatikaSederhana() {
+        setTitle("Aritmatika Sederhana");
+        setSize(400, 300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(null); // Gunakan layout manual
+
+        JLabel label1 = new JLabel("Angka 1:");
+        label1.setBounds(30, 20, 80, 25);
+        add(label1);
+
+        input1 = new JTextField();
+        input1.setBounds(110, 20, 100, 25);
+        add(input1);
+
+        JLabel label2 = new JLabel("Angka 2:");
+        label2.setBounds(220, 20, 80, 25);
+        add(label2);
+
+        input2 = new JTextField();
+        input2.setBounds(300, 20, 100, 25);
+        add(input2);
+
+        tambah = new JButton("+");
+        tambah.setBounds(30, 60, 60, 30);
+        kurang = new JButton("-");
+        kurang.setBounds(100, 60, 60, 30);
+        kali = new JButton("*");
+        kali.setBounds(170, 60, 60, 30);
+        bagi = new JButton("/");
+        bagi.setBounds(240, 60, 60, 30);
+
+        add(tambah);
+        add(kurang);
+        add(kali);
+        add(bagi);
+
+        JLabel labelHasil = new JLabel("Hasil:");
+        labelHasil.setBounds(30, 110, 80, 25);
+        add(labelHasil);
+
+        hasil = new JTextField();
+        hasil.setBounds(110, 110, 100, 25);
+        hasil.setEditable(false);
+        add(hasil);
+
+        // Event handler
+        tambah.addActionListener(this);
+        kurang.addActionListener(this);
+        kali.addActionListener(this);
+        bagi.addActionListener(this);
+
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        try {
+            double a = Double.parseDouble(input1.getText());
+            double b = Double.parseDouble(input2.getText());
+            double h = 0;
+
+            if (e.getSource() == tambah) h = a + b;
+            else if (e.getSource() == kurang) h = a - b;
+            else if (e.getSource() == kali) h = a * b;
+            else if (e.getSource() == bagi) h = a / b;
+
+            hasil.setText(String.valueOf(h));
+        } catch (NumberFormatException ex) {
+            hasil.setText("Input tidak valid!");
+        }
+    }
+
+    public static void main(String[] args) {
+        new AritmatikaSederhana();
+    }
+}
